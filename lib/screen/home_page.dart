@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:found/screen/login.dart';
+import 'package:found/services/authentication.dart';
 import 'package:found/shared_widgets/add_item.dart';
 import 'package:found/shared_widgets/found.dart';
 import 'package:found/shared_widgets/lost.dart';
@@ -93,6 +95,33 @@ class _HomePageState extends State<HomePage> {
                       child: Icon(Icons.sports, color: Colors.white),
                     ),
                     Text("Found", style: TextStyle(color: Colors.white)),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 12, vertical: 5),
+            child: Ink(
+              height: 40,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12),
+                color: Color(0xFF4B68AB),
+              ),
+              child: InkWell(
+                onTap: () {
+                  logout();
+                  Navigator.of(
+                    context,
+                  ).pushReplacement(MaterialPageRoute(builder: (_) => LoginPage()));
+                },
+                child: Row(
+                  children: [
+                    Container(
+                      margin: EdgeInsets.symmetric(horizontal: 10),
+                      child: Icon(Icons.logout, color: Colors.white),
+                    ),
+                    Text("logout", style: TextStyle(color: Colors.white)),
                   ],
                 ),
               ),

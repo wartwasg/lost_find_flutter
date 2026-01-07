@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:found/main.dart';
 import 'package:http/http.dart' as http;
 
 class Item {
@@ -29,7 +30,7 @@ List<Item> itemsFind = [
 
 Future<List<Item>> fetchFound() async {
   final uri = Uri.parse("http://localhost:8080/api/user/item-list/found");
-  var response = await http.get(uri);
+  var response = await http.get(uri, headers: {"Authorization": token});
   if (response.statusCode == 200) {
     var json = response.body;
     List<dynamic> list = jsonDecode(json);
@@ -41,7 +42,7 @@ Future<List<Item>> fetchFound() async {
 
 Future<List<Item>> fetchLost() async {
   final uri = Uri.parse("http://localhost:8080/api/user/item-list/lost");
-  var response = await http.get(uri);
+  var response = await http.get(uri, headers: {"Authorization": token});
   if (response.statusCode == 200) {
     var json = response.body;
     List<dynamic> list = jsonDecode(json);
@@ -55,7 +56,7 @@ Future<void> postFoundItem(Item item) async {
   final uri = Uri.parse("http://localhost:8080/api/user/add-item");
   var request = await http.post(
     uri,
-    headers: {'Content-type': 'application/json'},
+    headers: {'Content-type': 'application/json', "Authorization": token},
     body: jsonEncode(toJson(item)),
   );
   if (request.statusCode == 200) {
